@@ -1,0 +1,2 @@
+button{cursor:pointer;margin:5px;padding:20px 25px;font-size:16px}[data-start]{color:#fff;background-color:#4caf50;border:none;border-radius:20px}[data-stop]{color:#fff;background-color:#f44336;border:none;border-radius:20px}button:disabled{opacity:.7;cursor:not-allowed}body{flex-direction:column;display:flex}
+/*# sourceMappingURL=01-color-switcher.d762cf06.css.map */
