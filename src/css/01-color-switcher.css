@@ -1,0 +1,30 @@
+button {
+  padding: 20px 25px;
+  font-size: 16px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+[data-start] {
+  background-color: #4caf50; /* Verde */
+  color: white;
+  border: none;
+  border-radius: 20px;
+}
+
+[data-stop] {
+  background-color: #f44336; /* Rojo */
+  color: white;
+  border: none;
+  border-radius: 20px;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
