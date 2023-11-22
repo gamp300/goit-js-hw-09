@@ -3,6 +3,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
 
 function startTimer() {
+  document.querySelector('[data-start]').disabled = true;
   const options = {
     enableTime: true,
     time_24hr: true,
@@ -10,6 +11,7 @@ function startTimer() {
     minuteIncrement: 1,
     onClose(selectedDates) {
       handleDateSelection(selectedDates[0]);
+      document.querySelector('[data-start]').disabled = false;
     },
   };
 
@@ -24,7 +26,6 @@ function handleDateSelection(selectedDate) {
     document.querySelector('[data-start]').disabled = true;
   } else {
     document.querySelector('[data-start]').disabled = false;
-    startCountdown(selectedDate);
   }
 }
 
@@ -33,16 +34,14 @@ function startCountdown(endDate) {
 
   updateTimer(endDate);
 
-  document.querySelector('[data-start]').disabled = true;
-
   function updateTimer(endDate) {
     const now = new Date();
     const timeDifference = endDate - now;
 
     if (timeDifference <= 0) {
       clearInterval(timerInterval);
-      Notiflix.Notify.success('Se completo el tiempo!');
-      document.querySelector('[data-start]').disabled = false; // Habilitar el botón nuevamente
+      Notiflix.Notify.success('¡Se completó el tiempo!');
+      document.querySelector('[data-start]').disabled = false;
     } else {
       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       const hours = Math.floor(
@@ -67,5 +66,14 @@ function startCountdown(endDate) {
     return unit < 10 ? '0' + unit : unit;
   }
 }
+
+document.querySelector('[data-start]').addEventListener('click', function () {
+  const selectedDate = flatpickr('#datetime-picker').selectedDates[0];
+  handleDateSelection(selectedDate);
+  if (!document.querySelector('[data-start]').disabled) {
+    startCountdown(selectedDate);
+    document.querySelector('[data-start]').disabled = true;
+  }
+});
 
 document.addEventListener('DOMContentLoaded', startTimer);
